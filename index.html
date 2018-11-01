@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="utf-8">
+   <script src="https://d3js.org/d3.v4.min.js"></script>
+   <script src="https://d3js.org/queue.v1.min.js"></script>
+   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.11.0/d3-legend.min.js"></script>
+   <script src="https://d3js.org/d3-time.v1.min.js"></script>
+   <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+   <script src="https://d3js.org/d3-color.v1.min.js"></script>
+   <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+   <script type="text/javascript" src="map.js"></script>
+   <script type="text/javascript" src="red.js"></script>
+  <!--  <link href="style.css" rel="stylesheet" type="text/css"> -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+       /* body {
+          margin: 0;
+          width: 1000px;
+          height: 1000px;
+        }*/
+
+        svg {
+                border: 1px solid gray;
+          }
+
+        div.tooltip { 
+          position: absolute;
+          text-align: center;
+         /* height: 50px;*/
+          padding: 10px;
+          font: 11px sans-serif;
+          background: #dadaeb;
+          box-shadow: 0 0 5px #999999;
+          display: block;
+          color: #333;
+          border: 0px;
+          border-radius: 0px;
+          pointer-events: none;
+          text-align: left;
+        }
+
+
+     /* .tooltip {
+      
+       
+        color: #000000;
+       
+        left: 130px;
+      
+       
+        top: 95px;
+        z-index: 10;
+        display: block;
+        opacity: 0;
+      }
+*/
+
+       /* .counties {
+          fill: none;
+        }
+
+        .states {
+          fill: none;
+          stroke: #fff;
+          stroke-linejoin: round;
+        }*/
+    </style>
+ </head>
+ <body >
+     <div class='container'>
+        <div class="page-header">
+             <div class="col-md-9">
+                   <img src="logodatasketch.png" alt="..">
+              </div>
+
+              <div class="col-md-3">
+                   <img src="f.jpg" width="50" height="50" alt="..">
+                   <img src="t.jpg" width="50" height="50" alt="..">
+                    <img src="c.jpg" width="50" height="50" alt="..">
+              </div>
+        </div>
+          <div class="col-md-9">
+            <h1 ALIGN=center><b>ELECCIONES Y CONTRATOS EN COLOMBIA.</b></h1>
+            <p>Muestra el consolidado del hurto de celulares en Colombia a partir del año 2010  al 2018, discriminado por departamento.</p>
+            <p>Información extraída del portal POLICÍA NACIONAL DE COLOMBIA en el siguiente enlace: https://www.policia.gov.co/grupo-informaci%C3%B3n-criminalidad/estadistica-delictiva</p>
+
+            <p>A pesar de la estrategia implementada por el Gobierno para contrarrestar el hurto de teléfonos celulares, este delito no da tregua y en los primeros cuatro meses del año se contabilizaron unos 424.000 equipos robados.</p>
+          </div>
+          <div class="col-md-3">
+                   <h3>Guia:</h3>
+                   <p> - Esta visualización nos permite ver cuáles son los Departamentso con mas hurtos de celular.</p>
+          </div>
+      </div>
+     <!--  <h1 ALIGN=center><b> Visualización.</b></h1> -->
+
+     <!--  <div class="container">
+          <div class="buttons">
+            <label>Elecciones:</label>
+            <input type="radio" id="Congreso" name="property" value="Congreso" >
+            <label for="Congreso">Congreso</label>
+
+            <input type="radio" id="Territoriales" name="property" value="Territoriales" >
+            <label for="Territoriales">Territoriales</label>
+
+           
+          </div>
+      </div> -->
+      <div class='container'>
+          <h3>Ingrese parametros de consulta:</h3>
+      </div>  
+      <div class="container">
+          <label>Seleccione la Campaña:</label>
+            <select id="campana">
+              <option value="Alcaldia">Alcaldia</option>
+              <option value="Asamblea">Asamblea</option>
+              <option value="Camara de Representates">Camara de Representates</option>
+              <option value="Concejo">Concejo</option>
+              <option value="Gobernacion">Gobernacion</option>
+          </select>
+      </div>
+
+      <div class="container">
+          <label>Seleccione el Año:</label>
+            <select id="anno">
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
+          </select>
+     </div>
+      <div class="container">
+          <label>Seleccione el Departamento:</label>
+            <select onchange="loadCircularHeatMap(value, document.getElementById('anno').value, document.getElementById('campana').value)"  id="dpto">
+              <option value="AMAZONAS">AMAZONAS</option>
+              <option value="ANTIOQUIA">ANTIOQUIA</option>
+              <option value="ARAUCA">ARAUCA</option>
+              <option value="ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA">ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA</option>
+              <option value="ATLANTICO">ATLANTICO</option>
+              <option value="BOLIVAR">BOLIVAR</option>
+              <option value="BOYACA">BOYACA</option>
+              <option value="CALDAS">CALDAS</option>
+              <option value="CAQUETA">CAQUETA</option>
+              <option value="CASANARE">CASANARE</option>
+              <option value="CAUCA">CAUCA</option>
+              <option value="CESAR">CESAR</option>
+              <option value="CHOCO">CHOCO</option>
+              <option value="CORDOBA">CORDOBA</option>
+              <option value="CUNDINAMARCA">CUNDINAMARCA</option>
+              <option value="GUAINIA">GUAINIA</option>
+              <option value="GUAVIARE">GUAVIARE</option>
+              <option value="HUILA">HUILA</option>
+              <option value="LA GUAJIRA">LA GUAJIRA</option>
+              <option value="MAGDALENA">MAGDALENA</option>
+              <option value="META">META</option>
+              <option value="NARIÑO">NARIÑO</option>
+              <option value="NORTE DE SANTANDER">NORTE DE SANTANDER</option>
+              <option value="PUTUMAYO">PUTUMAYO</option>
+              <option value="QUINDIO">QUINDIO</option>
+              <option value="RISARALDA">RISARALDA</option>
+              <option value="SANTAFE DE BOGOTA D.C">SANTAFE DE BOGOTA D.C</option>
+              <option value="SANTANDER">SANTANDER</option>
+              <option value="SUCRE">SUCRE</option>
+              <option value="TOLIMA">TOLIMA</option>
+              <option value="VALLE DEL CAUCA">VALLE DEL CAUCA</option>
+              <option value="VAUPES">VAUPES</option>
+              <option value="VICHADA">VICHADA</option>
+           </select>
+      </div>
+
+     <div id="chart" class='container' >
+        <h1 ALIGN=center><b> Visualización MAP.</b></h1>
+          <svg  width=300 height=500  id="zooms"  ></svg>
+          <svg  width=700 height=500  id="main"></svg>
+          <script src="map.js">  </script> 
+     </div>
+
+    <div id="chart2" border-style= "solid" style="display:none;" class='container'>
+           <h2 ALIGN=center><b> Visualización RED.</b></h2>
+           <div class="container">
+                <label>Seleccione relacion:</label>
+                  <select onchange="loadCircularHeatRed(document.getElementById('dpto').value, document.getElementById('anno').value, document.getElementById('campana').value,value )" id="relacion">
+                    <option value="NA">Sin Parentesco</option>
+                    <option value="si">Parentesco</option>
+                    <option value="todos">TODOS</option>
+                  </select>
+            </div> 
+          <svg  width=1000 height=600 id="network"></svg>
+          <script src="red.js">  </script> 
+    </div>
+
+
+    <div id="chart3" style="display:none;">
+           <h2 ALIGN=center><b> Visualización BARRAS.</b></h2>
+           
+         
+    </div>
+    
+
+
+
+    <script>  loadCircularHeatMap("COLOMBIA");  </script>
+   <!--  <script>  loadCircularHeatRed("BOLIVAR","2015","Alcaldia");  </script> -->
+    <footer align="center" style="font-size: 12px;">
+                Iván Romero Flórez 201717315, Gerardo Pérez Clavijo 201519403,Stanley Melo Fontalvo 201723966<br>
+                Universidad de los Andes<br>
+                Maestría en Ingeniería de la Información
+    </footer>
+  </body>
+</html>
