@@ -148,7 +148,7 @@
         const simulation = d3.forceSimulation()
                            .velocityDecay(0.5)
                  .force("links",d3.forceLink().id(function(d){return d.id}))
-                 .force("charge",d3.forceManyBody().strength(-0.01))
+                 .force("charge",d3.forceManyBody().strength(-4))
                            .force("collide",d3.forceCollide())
                  .force("center",d3.forceCenter(width/2,height/2));   
 
@@ -157,7 +157,7 @@
           node.fx = node.x
           node.fy = node.y
         }).on('drag', function (node) {
-          simulation.alphaTarget(0.3).restart()
+          simulation.alphaTarget(0.9).restart()
           node.fx = d3.event.x
           node.fy = d3.event.y
         }).on('end', function (node) {
@@ -331,9 +331,10 @@
 
 
         function dblclick() {
-          alert("Gerardo Perez");
+         // alert("Gerardo Perez");
            document.getElementById('chart3').style.display = 'block';
-           loadCircularHeatRed(p_departamento, p_anno,p_campana,document.getElementById('relacion').value);
+          // loadCircularHeatRed(p_departamento, p_anno,p_campana,document.getElementById('relacion').value);
+          //  $( "#network" ).empty(); 
       }
 
 
