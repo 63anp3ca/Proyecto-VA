@@ -1,6 +1,6 @@
 function loadCircularHeatline(p_financiador) 
 { 
-        var margin = {top: 20, right: 30, bottom: 100, left: 100};
+        var margin = {top: 50, right: 30, bottom: 100, left: 100};
 
         // let svg = d3.select("#line"),
         //   width = +svg.attr("width"),
@@ -14,9 +14,20 @@ function loadCircularHeatline(p_financiador)
                     .attr("transform",
                           "translate(" + margin.left + "," + margin.top + ")");
         
-        var div = d3.select("body").append("div")	
-                    .attr("class", "tooltip")				
-                    .style("opacity", 0);
+        // var div = d3.select("body").append("div")	
+        //             .attr("class", "tooltip")				
+        //             .style("opacity", 0);
+
+
+
+    var tooltip = d3.select("body")
+                .append('div')
+                .attr('class', 'tooltip')
+                .attr("fill","#54278f" ) ;
+
+     // mapiar etiquetas
+    tooltip.append('div')
+      .attr('class', 'label');
         
     		var data;
 
@@ -86,13 +97,16 @@ function loadCircularHeatline(p_financiador)
               .call(d3.axisLeft(y));
 
               var svg_aline = g.append("line")
-              	.attr("class", "line")	
+              //	.attr("class", "line")	
+                .attr("fill", "none")
+                .attr("stroke", "#ffab00")
+                .attr("stroke-width", 3)
               	.style("stroke-dasharray", ("3, 10"))	
               	.attr("x1",100)
               	.attr("x2",400)
               	.attr("y1",200)
              	  .attr("y2",200)
-              	.style("display", "None")
+              	.style("display", "None");
   
               // Line 
               g.append("path")
@@ -113,21 +127,33 @@ function loadCircularHeatline(p_financiador)
                 .attr("class", "dot")
               	.on("mouseover", function(d) {	
                 		d3.select(this).transition().duration(100)
-                      .style("fill", "#ffab00")
-                      .attr("r", 12);
-                    div.transition()		
-                        .duration(200)		
-                        .style("opacity", .8);		
-                    div	.html(d.value +  " - "  +d.contrato + " "+ d.date)	
-                        .style("left", x(d.date) + "px")		
-                        .style("top", y(d.value) + "px");	
+                        .style("fill", "#ffab00")
+                        .attr("r", 12);
+                    // div.transition()		
+                    //     .duration(200)		
+                    //     .style("opacity", .8);		
+                    // div	.html(d.value +  " - "  +d.contrato + " "+ d.date)	
+                    //     .style("left", x(d.date) + "px")		
+                    //     .style("top", y(d.value) + "px");	
                 		svg_aline.transition().duration(10)
                     	.style("display", "block")
                     	.attr("x1", x(d.date))
                     	.attr("y1", y(d.value))
                     	.attr("x2", x(d.date))
-                    	.attr("y2", height)
-                    })			
+                    	.attr("y2", height);
+
+                    tooltip.select('.label').html("<b> texto: " + d.value +  " - "  +d.contrato + " "+ d.date  + "</b>");
+                    tooltip.style('display', 'block');
+                    tooltip.style('opacity',2);
+
+                    })		
+                   
+                 .on('mousemove', function(d) {
+
+                          tooltip.style('top', (d3.event.layerY + 10) + 'px')
+                          .style('left', (d3.event.layerX - 25) + 'px');
+                  })
+
                 .on("mouseout", function(d) {	
                 		d3.select(this).transition().duration(100)
                       .style("fill", "grey")
@@ -136,6 +162,9 @@ function loadCircularHeatline(p_financiador)
                         .duration(500)		
                         .style("opacity", 0);	
                 		svg_aline.style("display","None")
+
+                     tooltip.style('display', 'none');
+                          tooltip.style('opacity',0);
                 });
         })
 }
