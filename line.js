@@ -1,10 +1,14 @@
 function loadCircularHeatline(p_financiador) 
 { 
-        var margin = {top: 20, right: 30, bottom: 50, left: 40};
+        var margin = {top: 20, right: 30, bottom: 100, left: 100};
 
-        let svg = d3.select("#line"),
-          width = +svg.attr("width"),
-          height = + svg.attr("height");
+        // let svg = d3.select("#line"),
+        //   width = +svg.attr("width"),
+        //   height = + svg.attr("height");
+
+         let svg = d3.select("#line"),
+          width = 800,
+          height =400;  
 
         var g = svg.append("g")
                     .attr("transform",

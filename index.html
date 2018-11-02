@@ -2,6 +2,7 @@
 <html>
   <head>
    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <script src="https://d3js.org/d3.v4.min.js"></script>
    <script src="https://d3js.org/queue.v1.min.js"></script>
    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -19,6 +20,8 @@
      <link href="jumbotron.css" rel="stylesheet">
 
 <link href="bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
     <style>
@@ -75,253 +78,205 @@
               shape-rendering: crispEdges;
     }
 
-
-     /* .tooltip {
-      
-       
-        color: #000000;
-       
-        left: 130px;
-      
-       
-        top: 95px;
-        z-index: 10;
-        display: block;
-        opacity: 0;
-      }
-*/
-
-       /* .counties {
-          fill: none;
-        }
-
-        .states {
-          fill: none;
-          stroke: #fff;
-          stroke-linejoin: round;
-        }*/
-    </style>
+ </style>
  </head>
- <body >
-       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+      <body >
+             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                  <a class="navbar-brand" href="#">Navbar</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
 
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                      </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                   </div>
-                </li>
-              </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-            </div>
-          </nav>
+                </nav>
 
-         <main role="main">
+          <main role="main">
 
-              <!-- Main jumbotron for a primary marketing message or call to action -->
-              <div class="jumbotron">
-                <div class="container">
-                
-                   <img src="logodatasketch.png" alt="..">
+                    <!-- Main jumbotron for a primary marketing message or call to action -->
+                    <div class="jumbotron">
+                      <div class="container">
+                      
+                         <img src="logodatasketch.png" alt="..">
 
-                  <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-                </div>
-              </div>
+                        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+                      </div>
+                    </div>
 
-              <div class="container">
-                <!-- Example row of columns -->
-                <div class="row">
-                  <div class="col-md-4">
-                    <h2>ELECCIONES Y CONTRATOS EN COLOMBIA.</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    <div class="container">
+                      <!-- Example row of columns -->
+                      <div class="row">
+                        <div class="col-md-4">
+                          <h2>ELECCIONES Y CONTRATOS EN COLOMBIA.</h2>
+                          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        </div>
+                        <div class="col-md-4">
+                          <h2>MAP</h2>
+                          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        </div>
+                        <div class="col-md-4">
+                          <h2>RED</h2>
+                          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        </div>
+                      </div>
+
+                      <hr>
+                   </div> <!-- /container -->
+          
+                  <div class='container'>   
+                    <form>
+                        <h4>Ingrese parametros de consulta:</h4>
+
+                        <div class="row">
+                          <div class="col">
+                              <label for="exampleFormControlSelect1">Seleccione la Campaña:</label>
+                              <select class="form-control" id="campana">
+                                    <option value="Alcaldia">Alcaldia</option>
+                                    <option value="Asamblea">Asamblea</option>
+                                    <option value="Camara de Representates">Camara de Representates</option>
+                                    <option value="Concejo">Concejo</option>
+                                    <option value="Gobernacion">Gobernacion</option>
+                              </select>
+                          </div>
+                          <div class="col">
+                               <label for="exampleFormControlSelect1">Seleccione el Año:</label>
+                               <select class="form-control" id="anno">
+                                   <option value="2018">2018</option>
+                                   <option value="2017">2017</option>
+                                   <option value="2016">2016</option>
+                                   <option value="2015">2015</option>
+                               </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect1">Seleccione el Departamento:</label>
+                          <select class="form-control"   onchange="loadCircularHeatMap(value, document.getElementById('anno').value, document.getElementById('campana').value)"  id="dpto">
+                                  <option value="AMAZONAS">AMAZONAS</option>
+                                  <option value="ANTIOQUIA">ANTIOQUIA</option>
+                                  <option value="ARAUCA">ARAUCA</option>
+                                  <option value="ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA">ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA</option>
+                                  <option value="ATLANTICO">ATLANTICO</option>
+                                  <option value="BOLIVAR">BOLIVAR</option>
+                                  <option value="BOYACA">BOYACA</option>
+                                  <option value="CALDAS">CALDAS</option>
+                                  <option value="CAQUETA">CAQUETA</option>
+                                  <option value="CASANARE">CASANARE</option>
+                                  <option value="CAUCA">CAUCA</option>
+                                  <option value="CESAR">CESAR</option>
+                                  <option value="CHOCO">CHOCO</option>
+                                  <option value="CORDOBA">CORDOBA</option>
+                                  <option value="CUNDINAMARCA">CUNDINAMARCA</option>
+                                  <option value="GUAINIA">GUAINIA</option>
+                                  <option value="GUAVIARE">GUAVIARE</option>
+                                  <option value="HUILA">HUILA</option>
+                                  <option value="LA GUAJIRA">LA GUAJIRA</option>
+                                  <option value="MAGDALENA">MAGDALENA</option>
+                                  <option value="META">META</option>
+                                  <option value="NARIÑO">NARIÑO</option>
+                                  <option value="NORTE DE SANTANDER">NORTE DE SANTANDER</option>
+                                  <option value="PUTUMAYO">PUTUMAYO</option>
+                                  <option value="QUINDIO">QUINDIO</option>
+                                  <option value="RISARALDA">RISARALDA</option>
+                                  <option value="SANTAFE DE BOGOTA D.C">SANTAFE DE BOGOTA D.C</option>
+                                  <option value="SANTANDER">SANTANDER</option>
+                                  <option value="SUCRE">SUCRE</option>
+                                  <option value="TOLIMA">TOLIMA</option>
+                                  <option value="VALLE DEL CAUCA">VALLE DEL CAUCA</option>
+                                  <option value="VAUPES">VAUPES</option>
+                                  <option value="VICHADA">VICHADA</option>
+                          </select>
+                        </div>
+
+                    </form>
                   </div>
-                  <div class="col-md-4">
-                    <h2>MAP</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                  </div>
-                  <div class="col-md-4">
-                    <h2>RED</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                  </div>
-                </div>
 
-                <hr>
-             </div> <!-- /container -->
-            </main>
-
-
-
-
-
-
-
-
-     <div class='container'>
-       <!--  <div class="page-header">
-             <div class="col-md-9">
-                  
-              </div>
-
-              <div class="col-md-3">
-                   <img src="f.jpg" width="30" height="30" alt="..">
-                   <img src="t.jpg" width="30" height="30" alt="..">
-                    <img src="c.jpg" width="30" height="30" alt="..">
-              </div>
-        </div> -->
-        
          
-      </div>
-      <div class='container'>   
-        <form>
-            <h3>Ingrese parametros de consulta:</h3>
+                 <div id="chart" class='container' >
+                    <h3 ALIGN=center><b> Comportamineto de Financiación de campañas por Dartamento.</b></h3>
 
-            <div class="row">
-              <div class="col">
-                  <label for="exampleFormControlSelect1">Seleccione la Campaña:</label>
-                  <select class="form-control" id="campana">
-                        <option value="Alcaldia">Alcaldia</option>
-                        <option value="Asamblea">Asamblea</option>
-                        <option value="Camara de Representates">Camara de Representates</option>
-                        <option value="Concejo">Concejo</option>
-                        <option value="Gobernacion">Gobernacion</option>
-                  </select>
-              </div>
-              <div class="col">
-                   <label for="exampleFormControlSelect1">Seleccione el Año:</label>
-                   <select class="form-control" id="anno">
-                       <option value="2018">2018</option>
-                       <option value="2017">2017</option>
-                       <option value="2016">2016</option>
-                       <option value="2015">2015</option>
-                   </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Seleccione el Departamento:</label>
-              <select class="form-control"   onchange="loadCircularHeatMap(value, document.getElementById('anno').value, document.getElementById('campana').value)"  id="dpto">
-                      <option value="AMAZONAS">AMAZONAS</option>
-                      <option value="ANTIOQUIA">ANTIOQUIA</option>
-                      <option value="ARAUCA">ARAUCA</option>
-                      <option value="ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA">ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA</option>
-                      <option value="ATLANTICO">ATLANTICO</option>
-                      <option value="BOLIVAR">BOLIVAR</option>
-                      <option value="BOYACA">BOYACA</option>
-                      <option value="CALDAS">CALDAS</option>
-                      <option value="CAQUETA">CAQUETA</option>
-                      <option value="CASANARE">CASANARE</option>
-                      <option value="CAUCA">CAUCA</option>
-                      <option value="CESAR">CESAR</option>
-                      <option value="CHOCO">CHOCO</option>
-                      <option value="CORDOBA">CORDOBA</option>
-                      <option value="CUNDINAMARCA">CUNDINAMARCA</option>
-                      <option value="GUAINIA">GUAINIA</option>
-                      <option value="GUAVIARE">GUAVIARE</option>
-                      <option value="HUILA">HUILA</option>
-                      <option value="LA GUAJIRA">LA GUAJIRA</option>
-                      <option value="MAGDALENA">MAGDALENA</option>
-                      <option value="META">META</option>
-                      <option value="NARIÑO">NARIÑO</option>
-                      <option value="NORTE DE SANTANDER">NORTE DE SANTANDER</option>
-                      <option value="PUTUMAYO">PUTUMAYO</option>
-                      <option value="QUINDIO">QUINDIO</option>
-                      <option value="RISARALDA">RISARALDA</option>
-                      <option value="SANTAFE DE BOGOTA D.C">SANTAFE DE BOGOTA D.C</option>
-                      <option value="SANTANDER">SANTANDER</option>
-                      <option value="SUCRE">SUCRE</option>
-                      <option value="TOLIMA">TOLIMA</option>
-                      <option value="VALLE DEL CAUCA">VALLE DEL CAUCA</option>
-                      <option value="VAUPES">VAUPES</option>
-                      <option value="VICHADA">VICHADA</option>
-              </select>
-            </div>
-
-        </form>
-      </div>
-
-   
-     <div id="chart" class='container' >
-        <h3 ALIGN=center><b> Comportamineto de Financiación de campañas por Dartamento.</b></h3>
-
-         <p>En este mapa se presentan los departamentos de los candidatos que recibieron financiamiento para sus campañas.  En las listas disponibles debe seleccionar la campaña, año y departamento sobre los cuales se desea conocer el comportamiento de financiamiento.  Al hacer doble click en cualquier parte del mapa podrá acceder a la red de campañas y financiadores, incluyendo su parentesco. Adicionalmente, al pasar sobre los distintos departamentos se muestra un mensaje emergente con la información con el monto total de financiamiento a la campaña.</p>
+                     <p>En este mapa se presentan los departamentos de los candidatos que recibieron financiamiento para sus campañas.  En las listas disponibles debe seleccionar la campaña, año y departamento sobre los cuales se desea conocer el comportamiento de financiamiento.  Al hacer doble click en cualquier parte del mapa podrá acceder a la red de campañas y financiadores, incluyendo su parentesco. Adicionalmente, al pasar sobre los distintos departamentos se muestra un mensaje emergente con la información con el monto total de financiamiento a la campaña.</p>
 
 
-          <svg  width=300 height=500  id="zooms"  ></svg>
-          <svg  width=700 height=500  id="main"></svg>
-          <script src="map.js">  </script> 
-     </div>
+                      <svg  width=300 height=500  id="zooms"  ></svg>
+                      <svg  width=700 height=500  id="main"></svg>
+                      <script src="map.js">  </script> 
+                 </div>
+               <div id="chart2" border-style= "solid" style="display:none;" class='container' >
+                       <h3 ALIGN=center><b>Red de financiamiento de Candidatos por departamento.</b></h3>
+                       <p>La red de financiadores de campañas.  Esta visualización permite: - Conocer la red de financiadores de campañas y su historial parentesco con el candidato.  ¿Cómo explorar la red? 
+                       Para obtener el detalle de un Candidato o Financiador de campaña, haga 'click' en los botones azules para conocer los candidatos o los purpuras para conocer los financiadores, en el enlace se pueden conocer los detalles de parentesco. Para regresar a la visualización general de la red vuelva a hacer 'click' en alguno de los círculos de color.  </p> 
+                       <form>
+                            <h4>Ingrese parametros de consulta:</h4>
+                            <div class="form-group">
+                                  <label>Seleccione relacion:</label>
+                                  <select class="form-control" onchange="loadCircularHeatRed(document.getElementById('dpto').value, document.getElementById('anno').value, document.getElementById('campana').value,value )" id="relacion">
+                                    <option value="NA">Sin Parentesco</option>
+                                    <option value="si">Parentesco</option>
+                                    <option value="todos">TODOS</option>
+                                  </select>
+                            </div>  
+                       </form>     
+                       <svg  width=1000 height=600 id="network"></svg>
+                       <script src="red.js">  </script> 
+                </div>
+                <div id="chart3" style="display:none;" class='container'>
+                       <h3 ALIGN=center><b> Comportamiento en celabración de contratos públicos por el financiador.</b></h3>
+                       <p> Esta visualización de los datos de financiadores y contratos públicos, presenta la cantidad de contratos y la sumatoria de los montos de contratos para el periodo de años comprendidas del 2006 al 2018.  Al situarse en los puntos se desplegará información con los detalles de montos totales. </p>   
+                       <svg  width=1000 height=500 id="line" ></svg>    
+                       <script src="line.js">  </script>      
+                </div>
+                <script>  loadCircularHeatMap("COLOMBIA");  </script>
+        </main>
+        <!--  <script>  loadCircularHeatRed("BOLIVAR","2015","Alcaldia");  </script> -->
+        <footer style="background-color: #cacaca;
+                        margin: 0;
+                        margin-left: 1px;
+                        max-width: 99%;
+                        height: 111px;" class="container">
+              
+              <div class="row">
+                    <div class="col">
+                          <p>&copy; Company 2017-2018</p>
+                    </div>
+                    <div class="col">
+                          <p>Iván Romero Flórez 201717315<br> Gerardo Pérez Clavijo 201519403 <br>Stanley Melo Fontalvo 201723966<br> </p>
+                    </div>
+                    <div class="col"  align="right"> 
+                         <a href="ddddd"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="ddddd"><i class="fab fa-twitter-square fa-2x"></i></a>
+                        <a href="ddddd"><i class="fas fa-envelope fa-2x"></i></a>
+                    </div>
+               </div>      
+        </footer>
+        <script src="popper.min.js"></script>
+        <script src="bootstrap.min.js"></script>
 
-    <div id="chart2" border-style= "solid" style="display:none;" class='container'>
-           <h3 ALIGN=center><b>Red de financiamiento de Candidatos por departamento.</b></h3>
-
-            <p>La red de financiadores de campañas.  Esta visualización permite: - Conocer la red de financiadores de campañas y su historial parentesco con el candidato.  ¿Cómo explorar la red? 
-            Para obtener el detalle de un Candidato o Financiador de campaña, haga 'click' en los botones azules para conocer los candidatos o los purpuras para conocer los financiadores, en el enlace se pueden conocer los detalles de parentesco. Para regresar a la visualización general de la red vuelva a hacer 'click' en alguno de los círculos de color.  </p> 
-           
-
-           <div class="container">
-                <label>Seleccione relacion:</label>
-                  <select onchange="loadCircularHeatRed(document.getElementById('dpto').value, document.getElementById('anno').value, document.getElementById('campana').value,value )" id="relacion">
-                    <option value="NA">Sin Parentesco</option>
-                    <option value="si">Parentesco</option>
-                    <option value="todos">TODOS</option>
-                  </select>
-            </div> 
-          <svg  width=1000 height=600 id="network"></svg>
-          <script src="red.js">  </script> 
-    </div>
-
-
-    <div id="chart3" style="display:none;" class='container'>
-           <h3 ALIGN=center><b> Comportamiento en celabración de contratos públicos por el financiador.</b></h3>
-
-            <p> Esta visualización de los datos de financiadores y contratos públicos, presenta la cantidad de contratos y la sumatoria de los montos de contratos para el periodo de años comprendidas del 2006 al 2018.  Al situarse en los puntos se desplegará información con los detalles de montos totales. </p>   
-            <svg  width=1000 height=500 id="line"></svg>    
-            <script src="line.js">  </script>      
-         
-    </div>
-    
-
-
-
-    <script>  loadCircularHeatMap("COLOMBIA");  </script>
-   
-
-
-   <!--  <script>  loadCircularHeatRed("BOLIVAR","2015","Alcaldia");  </script> -->
-    <footer class="container">
-      <p>&copy; Company 2017-2018</p>
-    </footer>
-
-    <!-- <footer align="center" style="font-size: 12px;">
-                Iván Romero Flórez 201717315, Gerardo Pérez Clavijo 201519403,Stanley Melo Fontalvo 201723966<br>
-                Universidad de los Andes<br>
-                Maestría en Ingeniería de la Información
-    </footer> -->
-    <script src="popper.min.js"></script>
-    <script src="bootstrap.min.js"></script>
-
-  </body>
+    </body>
 </html>

@@ -367,7 +367,7 @@
          // alert("Gerardo Perez");
            document.getElementById('chart3').style.display = 'block';
            loadCircularHeatline(p_departamento);
-           $( "#network" ).empty(); 
+         
       }
 
 
