@@ -1,6 +1,7 @@
 function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
   $( "#main" ).empty(); 
-  $( "#zooms" ).empty(); 
+  $( "#zooms" ).empty();
+
  
   document.getElementById('chart2').style.display = 'none';
   document.getElementById('chart3').style.display = 'none';
@@ -174,7 +175,7 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
   zoom.scaleExtent([1, 8]);
 
   var projection = d3.geoMercator()
-      .scale(1650)
+      .scale(1600)
       .center([-74, 4.5]) // Center the Map in Colombia
       .translate([width / 2, height / 2]);
 

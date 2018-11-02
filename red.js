@@ -43,8 +43,8 @@
        {
          if (error) throw error;
      
-           // console.log("data");
-           // console.log(data);
+            console.log("data");
+            console.log(data);
 
            // console.log("p_parentesco");
            // console.log(p_parentesco);
@@ -123,11 +123,11 @@
          graph.nodes=nodes,
          graph.links=links;
          
-         console.log("nodes");
-         console.log(nodes);
+         // console.log("nodes");
+         // console.log(nodes);
 
-         console.log("links");
-         console.log(links);
+         // console.log("links");
+         // console.log(links);
 
          // console.log("graph");
          // console.log(graph);
@@ -146,7 +146,7 @@
       
      
         const simulation = d3.forceSimulation()
-                           .velocityDecay(0.5)
+                           .velocityDecay(0.8)
                  .force("links",d3.forceLink().id(function(d){return d.id}))
                  .force("charge",d3.forceManyBody().strength(-4))
                            .force("collide",d3.forceCollide())
@@ -157,7 +157,7 @@
           node.fx = node.x
           node.fy = node.y
         }).on('drag', function (node) {
-          simulation.alphaTarget(0.9).restart()
+          simulation.alphaTarget(0.3).restart()
           node.fx = d3.event.x
           node.fy = d3.event.y
         }).on('end', function (node) {
@@ -181,9 +181,9 @@
           .attr("stroke", "rgba(50, 50, 50, 0.2)")
           .on('mouseover', function(d) {
                // tooltip.select('.parentesco').html("<b> parentesco: " + d.parentesco  + "</b>");
-               //  tooltip.select('.target').html("<b> Candidato: " + d.source.id  + "</b>");
+                 tooltip.select('.candidato').html("<b>  Departamento Ingreso: " + dbbuscard(d.source.id , d.target.id)  + "</b>" );
                  tooltip.select('.source').html("<b> Financiador: " + d.target.id  + "</b>");
-                 tooltip.select('.parentesco').html("<b> parentesco: " + dbbuscar(d.source.id , d.target.id)  + "</b>");
+                 tooltip.select('.parentesco').html("<b> parentesco: " + dbbuscarp(d.source.id , d.target.id)  + "</b>");
                  tooltip.select('.monto').html("<b> monto: " + Intl.NumberFormat().format(d.value)   + "</b>");
                  tooltip.style('display', 'block');
                  tooltip.style('opacity',2)
@@ -209,10 +209,9 @@
           .enter().append("circle")
             .attr("r",function(d){
                    if (d.type == "target") 
-                      { return 3 ;}
+                      { return 5 ;}
                    else 
-                      {return 25;}})
-                    //  {return d.volume;}})
+                      {return radio(d.volume);}})
             .attr("fill", getNodeColor)
             .call(dragDrop)
             .on('click', selectNode)
@@ -296,10 +295,10 @@
 
         function getNodeColor(node, neighbors) {
           if (Array.isArray(neighbors) && neighbors.indexOf(node.id) > -1) {
-            return node.type === "source" ? '#fc4e2a' : '#FFE80D' // ''naranja' : 'morado'
+            return node.type === "source" ? '#fc4e2a' : '#FFE80D' // ''naranja' : 'amarillo'
           }
 
-          return node.type === "source" ? '#253494' : '#1d91c0'   // 'azul oscuro' : 'azul claro' primer plano 
+          return node.type === "source" ? '#08306b' : '#6a51a3'   // 'azul oscuro' : 'azul claro' primer plano 
         };
 
 
@@ -322,19 +321,53 @@
         }
 
 
-        function dbbuscar(p_candidato,p_financiador) {
+        function dbbuscarp(p_candidato,p_financiador) {
            var dataFiltered = data.filter(function (d) { return d.candidato === p_candidato 
                                                               && d.financiador === p_financiador  })
            var dataFiltered2 = dataFiltered.map(d=> d.parentesco);
              return dataFiltered2[0]
         }
 
+        function dbbuscard(p_candidato,p_financiador) {
+           var dataFiltered3 = data.filter(function (d) { return d.candidato === p_candidato 
+                                                              && d.financiador === p_financiador  });
+
+            console.log("dataFiltered3");
+              console.log(dataFiltered3);
+           var dataFiltered4 = dataFiltered3.map(d=> d.departamentoi);
+              console.log("dataFiltered4");
+              console.log(dataFiltered4[0]);
+             return dataFiltered4[0]
+        }
+
+
+         function radio(p_monto) {
+               if (p_monto <= 100000000) {
+                 return 10
+                } else if (p_monto > 100000000 && p_monto <= 200000000) {
+                        return 15
+                } else if (p_monto > 300000000 && p_monto <= 400000000) {
+                        return 20
+                } else if (p_monto > 400000000 && p_monto <= 500000000) {
+                        return 25
+                } else if (p_monto > 500000000 && p_monto <= 600000000) {
+                        return 30
+                } else if (p_monto > 600000000 && p_monto <= 700000000) {
+                        return 35
+                } else if (p_monto > 700000000 && p_monto <= 800000000) {
+                        return 40
+                } else if (p_monto > 800000000 && p_monto <= 900000000) {
+                      return 45
+                } else {
+                        return 50  
+           }
+         }
 
         function dblclick() {
          // alert("Gerardo Perez");
            document.getElementById('chart3').style.display = 'block';
-          // loadCircularHeatRed(p_departamento, p_anno,p_campana,document.getElementById('relacion').value);
-          //  $( "#network" ).empty(); 
+           loadCircularHeatline(p_departamento);
+           $( "#network" ).empty(); 
       }
 
 
@@ -347,6 +380,7 @@
           financiador:d.financiador,
           parentesco:d.parentesco,
           departamento:d.departamento,
+          departamentoi:d.departamento_Ingreso,
           anno:d.anno,
           cargo:d.cargo,
           value:+d.valor
