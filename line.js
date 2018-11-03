@@ -19,7 +19,15 @@ function loadCircularHeatline(p_financiador)
 
          // mapiar etiquetas
         tooltip.append('div')
-               .attr('class', 'label');
+               .attr('class', 'contrato');
+        tooltip.append('div')
+               .attr('class', 'fecha');
+        tooltip.append('div')
+               .attr('class', 'monto');
+        tooltip.append('div')
+               .attr('class', 'entidad');
+        tooltip.append('div')
+               .attr('class', 'municipio');              
         
     		var data;
 
@@ -41,6 +49,14 @@ function loadCircularHeatline(p_financiador)
               
               var dataFiltered = data.filter(function(d) { return d.Representante === p_financiador });
               var max = d3.max(dataFiltered, function(d){return parseInt(d.value)});
+
+              console.log("data");
+              console.log(data);
+
+
+              console.log("dataFiltered");
+              console.log(dataFiltered);
+
               var y = d3.scaleLinear()
                 .domain([0, max])
                 .range([height,0]);
@@ -75,9 +91,9 @@ function loadCircularHeatline(p_financiador)
                   .attr('class', 'legend')
                   .append("text")
                   .attr("x", -32)
-                  .attr("y", -15)
+                  .attr("y", -25)
                   .attr("dy", "0.71em")
-                  .attr('font-size', '12px')
+                  .attr('font-size', '14px')
                   .attr("fill", "#3d3d3d")
                   .text(p_financiador.toUpperCase());
 
@@ -121,8 +137,11 @@ function loadCircularHeatline(p_financiador)
                     	.attr("y1", y(d.value))
                     	.attr("x2", x(d.date))
                     	.attr("y2", height);
-
-                    tooltip.select('.label').html("<b> texto: " + d.value +  " - "  +d.contrato + " "+ d.date  + "</b>");
+                    tooltip.select('.contrato').html("<b> Contrato: " + d.NumeroContrato + "</b>");
+                    tooltip.select('.fecha').html("<b> Fecha: "+ d.date.toDateString("yyyy-MM-dd")  + "</b>");
+                    tooltip.select('.monto').html("<b> Monto: " + Intl.NumberFormat().format(d.value) + "</b>");
+                    tooltip.select('.entidad').html("<b> Entidad: " +d.Entidad+  "</b>");
+                    tooltip.select('.municipio').html("<b> Municipio: " +d.Municipios  + "</b>");
                     tooltip.style('display', 'block');
                     tooltip.style('opacity',2);
 

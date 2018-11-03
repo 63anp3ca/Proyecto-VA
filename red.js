@@ -44,8 +44,8 @@
        {
          if (error) throw error;
      
-            // console.log("data");
-            // console.log(data);
+            console.log("data");
+            console.log(data);
 
            // console.log("p_parentesco");
            // console.log(p_parentesco);
@@ -122,8 +122,8 @@
          // console.log("links");
          // console.log(links);
 
-         // console.log("graph");
-         // console.log(graph);
+          console.log("graph");
+          console.log(graph);
     
         svg.call(
           d3.zoom()
@@ -209,15 +209,17 @@
                       { return 5 ;}
                    else 
                       {return radio(d.volume);}})
+          //  .style("stroke","#e7298a")
+            .style("stroke", function(d){
+                   if (dbbuscarf(d.id )  == "SI"  && d.type == "target") 
+                      { return "#e7298a" ;}
+                   else 
+                      {return "#ffffff" ;}}) 
             .attr("fill", getNodeColor)
             .call(dragDrop)
             .on('click', selectNode)
-         //   .on("dblclick", dblclick(graph.nodes.id))
             .on("dblclick",  function(d) {
-                  // console.log("graph.nodes.id");
-                  // console.log(d.id);
-                  // console.log(graph.nodes.id);
-                   $( "#line" ).empty(); 
+                  $( "#line" ).empty(); 
                   document.getElementById('chart3').style.display = 'block';
                   loadCircularHeatline(d.id);
              })
@@ -305,7 +307,7 @@
             return node.type === "source" ? '#fc4e2a' : '#FFE80D' // ''naranja' : 'amarillo'
           }
 
-          return node.type === "source" ? '#08306b' : '#6a51a3'   // 'azul oscuro' : 'azul claro' primer plano 
+          return node.type === "source" ? '#08306b' : '#6a51a3'   // 'azul oscuro' : 'morado'
         };
 
 
@@ -340,6 +342,13 @@
                                                               && d.financiador === p_financiador  });
            var dataFiltered4 = dataFiltered3.map(d=> d.departamentoi);
               return dataFiltered4[0]
+        }
+
+
+        function dbbuscarf(p_financiador) {
+           var dataFiltered5 = data.filter(function (d) { return d.financiador === p_financiador  });
+           var dataFiltered6 = dataFiltered5.map(d=> d.contratos);
+              return dataFiltered6[0]
         }
 
 
@@ -384,6 +393,7 @@
           departamentoi:d.departamento_Ingreso,
           anno:d.anno,
           cargo:d.cargo,
+          contratos:d.contratos,
           value:+d.valor
         }
       }   
