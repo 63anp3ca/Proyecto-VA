@@ -6,7 +6,8 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
   document.getElementById('chart2').style.display = 'none';
   document.getElementById('chart3').style.display = 'none';
 
-  loadCircularHeatRed("","","","");
+//  loadCircularHeatRed("","","","");
+ // loadCircularHeatline("");
   ///// calculo latitud longitud departamento 
   var latitud = 0.00, longitud = 0.00;
   switch (p_departamento)
@@ -154,13 +155,6 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
           break;
   }
 
-  
-          
-
-
-  //////////
-
-
 
   var margin = {top: 0, right: 0, bottom: 0, left: 0},
     width = 500 - margin.left - margin.right,
@@ -218,8 +212,8 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
                                                       && d.cargo === p_campana
                                                       && d.anno === p_anno
                                                     });
-     console.log("dataFiltered");
-     console.log(dataFiltered);    
+     // console.log("dataFiltered");
+     // console.log(dataFiltered);    
 
     var dictData = {};
     dataset.forEach(function (d) {
@@ -268,12 +262,12 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
   var min = d3.min(arrayDictData, function(d) { return d.cantidad; });
   var max = d3.max(arrayDictData, function(d) { return d.cantidad; });
   
-  console.log("min");
-  console.log(min);  
+  // console.log("min");
+  // console.log(min);  
 
 
-  console.log("max");
-  console.log(max);  
+  // console.log("max");
+  // console.log(max);  
 
   if (min == max ){ min= 0;}; 
 
@@ -306,7 +300,7 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
             .attr("d", path)
             .style("fill", function(d) { 
               var departamento = dictData2[d.properties.NOMBRE_DPT];
-                console.log(dictData2[d.properties.NOMBRE_DPT]); 
+                //console.log(dictData2[d.properties.NOMBRE_DPT]); 
                 if (departamento){
                   return color(departamento.cantidad);
                 } else{
@@ -439,6 +433,7 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
 
    function dblclick() {
         document.getElementById('chart2').style.display = 'block';
+        document.getElementById('chart3').style.display = 'none';
         loadCircularHeatRed(p_departamento, p_anno,p_campana, "todos");
     }
 

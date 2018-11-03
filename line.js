@@ -1,33 +1,25 @@
 function loadCircularHeatline(p_financiador) 
 { 
+        
+        console.log("p_financiador");
+              console.log(p_financiador);
+
         var margin = {top: 50, right: 30, bottom: 100, left: 100};
-
-        // let svg = d3.select("#line"),
-        //   width = +svg.attr("width"),
-        //   height = + svg.attr("height");
-
-         let svg = d3.select("#line"),
+        let svg = d3.select("#line"),
           width = 800,
           height =400;  
 
         var g = svg.append("g")
                     .attr("transform",
                           "translate(" + margin.left + "," + margin.top + ")");
-        
-        // var div = d3.select("body").append("div")	
-        //             .attr("class", "tooltip")				
-        //             .style("opacity", 0);
-
-
-
-    var tooltip = d3.select("body")
+        var tooltip = d3.select("body")
                 .append('div')
                 .attr('class', 'tooltip')
                 .attr("fill","#54278f" ) ;
 
-     // mapiar etiquetas
-    tooltip.append('div')
-      .attr('class', 'label');
+         // mapiar etiquetas
+        tooltip.append('div')
+               .attr('class', 'label');
         
     		var data;
 
@@ -47,35 +39,17 @@ function loadCircularHeatline(p_financiador)
                     d.date      = parseTime(d.FechaIni);
                     });
               
-              console.log("data");
-              console.log(data);
-
-              var dataFiltered = data.filter(function(d) { return d.Representante === "hector fabio osorio rivillas" });
-
-              console.log("dataFiltered");
-              console.log(dataFiltered);
-
-
+              var dataFiltered = data.filter(function(d) { return d.Representante === p_financiador });
               var max = d3.max(dataFiltered, function(d){return parseInt(d.value)});
-             
-
               var y = d3.scaleLinear()
                 .domain([0, max])
                 .range([height,0]);
-              
               var x = d3.scaleTime()
                 .rangeRound([0, width]);
-              
               x.domain(d3.extent(dataFiltered, function(d) { return d.date; }));
-              
-  
               var line = d3.line()
             		.x(function(d) { return x(d.date); })
             		.y(function(d) { return y(d.value); });
-              
-          //    console.log(data.length);
-            
-
               var barwidth = width / data.length ;
         			
                         
@@ -95,6 +69,18 @@ function loadCircularHeatline(p_financiador)
 
               //.attr("transform", "translate(0," + (height) + ")")
               .call(d3.axisLeft(y));
+
+
+             g.append('g')
+                  .attr('class', 'legend')
+                  .append("text")
+                  .attr("x", -32)
+                  .attr("y", -15)
+                  .attr("dy", "0.71em")
+                  .attr('font-size', '12px')
+                  .attr("fill", "#3d3d3d")
+                  .text(p_financiador.toUpperCase());
+
 
               var svg_aline = g.append("line")
               //	.attr("class", "line")	
@@ -129,13 +115,7 @@ function loadCircularHeatline(p_financiador)
                 		d3.select(this).transition().duration(100)
                         .style("fill", "#ffab00")
                         .attr("r", 12);
-                    // div.transition()		
-                    //     .duration(200)		
-                    //     .style("opacity", .8);		
-                    // div	.html(d.value +  " - "  +d.contrato + " "+ d.date)	
-                    //     .style("left", x(d.date) + "px")		
-                    //     .style("top", y(d.value) + "px");	
-                		svg_aline.transition().duration(10)
+                    svg_aline.transition().duration(10)
                     	.style("display", "block")
                     	.attr("x1", x(d.date))
                     	.attr("y1", y(d.value))
@@ -149,7 +129,6 @@ function loadCircularHeatline(p_financiador)
                     })		
                    
                  .on('mousemove', function(d) {
-
                           tooltip.style('top', (d3.event.layerY + 10) + 'px')
                           .style('left', (d3.event.layerX - 25) + 'px');
                   })
@@ -158,13 +137,9 @@ function loadCircularHeatline(p_financiador)
                 		d3.select(this).transition().duration(100)
                       .style("fill", "grey")
                       .attr("r", 8);
-                    div.transition()		
-                        .duration(500)		
-                        .style("opacity", 0);	
-                		svg_aline.style("display","None")
-
-                     tooltip.style('display', 'none');
-                          tooltip.style('opacity',0);
+                   	svg_aline.style("display","None")
+                    tooltip.style('display', 'none');
+                    tooltip.style('opacity',0);
                 });
         })
 }

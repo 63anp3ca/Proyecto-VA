@@ -1,9 +1,10 @@
  function loadCircularHeatRed (p_departamento, p_anno,p_campana, p_parentesco) { 
  
-
- $( "#network" ).empty(); 
- 
-
+   
+    document.getElementById('chart3').style.display = 'none';
+     
+    $( "#network" ).empty(); 
+    
 
     var tooltip = d3.select("body")
                 .append('div')
@@ -43,8 +44,8 @@
        {
          if (error) throw error;
      
-            console.log("data");
-            console.log(data);
+            // console.log("data");
+            // console.log(data);
 
            // console.log("p_parentesco");
            // console.log(p_parentesco);
@@ -55,10 +56,6 @@
                           var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
                                                               && d.cargo === p_campana
                                                               && d.anno === p_anno });
-
-                          // console.log("dataFiltered todos");
-                          // console.log(dataFiltered);    
-
                       }
                      else if  ( p_parentesco == "NA") 
                       {
@@ -66,8 +63,6 @@
                                                               && d.cargo === p_campana
                                                               && d.anno === p_anno
                                                               && d.parentesco === "NA"});
-                            // console.log("dataFiltered sin parentesco");
-                            // console.log(dataFiltered);    
                      } 
                      else  
                      {
@@ -75,9 +70,7 @@
                                                               && d.cargo === p_campana
                                                               && d.anno === p_anno
                                                               && d.parentesco != "NA"});
-                            // console.log("dataFiltered parentesco");
-                            // console.log(dataFiltered);    
-                     };
+                    };
 
             
             
@@ -123,8 +116,8 @@
          graph.nodes=nodes,
          graph.links=links;
          
-         // console.log("nodes");
-         // console.log(nodes);
+         // console.log("graph.nodes");
+         // console.log(graph.nodes);
 
          // console.log("links");
          // console.log(links);
@@ -177,10 +170,14 @@
           .selectAll("line")
           .data(graph.links)
           .enter().append("line")
-          .attr("stroke-width", 3)
+         // .attr("stroke-width", 3)
+          .attr("stroke-width", function(d){
+                   if (dbbuscarp(d.source , d.target)  == "NA") 
+                      { return 2 ;}
+                   else 
+                      {return 5 ;}})        
           .attr("stroke", "rgba(50, 50, 50, 0.2)")
           .on('mouseover', function(d) {
-               // tooltip.select('.parentesco').html("<b> parentesco: " + d.parentesco  + "</b>");
                  tooltip.select('.candidato').html("<b>  Departamento Ingreso: " + dbbuscard(d.source.id , d.target.id)  + "</b>" );
                  tooltip.select('.source').html("<b> Financiador: " + d.target.id  + "</b>");
                  tooltip.select('.parentesco').html("<b> parentesco: " + dbbuscarp(d.source.id , d.target.id)  + "</b>");
@@ -215,7 +212,17 @@
             .attr("fill", getNodeColor)
             .call(dragDrop)
             .on('click', selectNode)
-            .on("dblclick", dblclick)
+         //   .on("dblclick", dblclick(graph.nodes.id))
+            .on("dblclick",  function(d) {
+                  // console.log("graph.nodes.id");
+                  // console.log(d.id);
+                  // console.log(graph.nodes.id);
+                   $( "#line" ).empty(); 
+                  document.getElementById('chart3').style.display = 'block';
+                  loadCircularHeatline(d.id);
+             })
+      //    loadCircularHeatline(p_financiador) )
+
             .on('mouseover', function(d) {
                  tooltip.select('.candidato').html( d.id );
                  tooltip.select('.target').html("</b>");
@@ -331,13 +338,8 @@
         function dbbuscard(p_candidato,p_financiador) {
            var dataFiltered3 = data.filter(function (d) { return d.candidato === p_candidato 
                                                               && d.financiador === p_financiador  });
-
-            console.log("dataFiltered3");
-              console.log(dataFiltered3);
            var dataFiltered4 = dataFiltered3.map(d=> d.departamentoi);
-              console.log("dataFiltered4");
-              console.log(dataFiltered4[0]);
-             return dataFiltered4[0]
+              return dataFiltered4[0]
         }
 
 
@@ -363,10 +365,9 @@
            }
          }
 
-        function dblclick() {
-         // alert("Gerardo Perez");
-           document.getElementById('chart3').style.display = 'block';
-           loadCircularHeatline(p_departamento);
+        function dblclick(p_financiador) {
+            document.getElementById('chart3').style.display = 'block';
+            loadCircularHeatline(p_financiador);
          
       }
 
