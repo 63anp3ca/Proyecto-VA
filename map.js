@@ -1,8 +1,6 @@
 function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
   $( "#main" ).empty(); 
   $( "#zooms" ).empty();
-
- 
   document.getElementById('chart2').style.display = 'none';
   document.getElementById('chart3').style.display = 'none';
 
@@ -271,7 +269,7 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
 
   if (min == max ){ min= 0;}; 
 
-  var color = d3.scaleSequential(d3.interpolateRdYlGn)
+  var color = d3.scaleSequential(d3.interpolateYlGnBu)
     .domain([min, max]);
 
   svg.call(zoom);
@@ -304,12 +302,12 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
                 if (departamento){
                   return color(departamento.cantidad);
                 } else{
-                  return '#ffffff';
+                  return '#bdbdbd';
                 } 
              })
             .style("opacity",0.8)
-            .style("stroke","#bdbdbd")
-            .style('stroke-width', 0.8)
+            .style("stroke","#ffffff")
+            .style('stroke-width', 1)
             .on("dblclick", dblclick)
             .on("mouseover", function(d) {
               var label = '';     

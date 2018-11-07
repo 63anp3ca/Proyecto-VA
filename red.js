@@ -179,7 +179,7 @@
           .attr("stroke", "rgba(50, 50, 50, 0.2)")
           .on('mouseover', function(d) {
                  tooltip.select('.candidato').html("<b>  Departamento Ingreso: " + dbbuscard(d.source.id , d.target.id)  + "</b>" );
-                 tooltip.select('.source').html("<b> Financiador: " + d.target.id  + "</b>");
+                 tooltip.select('.source').html("<b> Financiador: " + d.target.id.toUpperCase()  + "</b>");
                  tooltip.select('.parentesco').html("<b> parentesco: " + dbbuscarp(d.source.id , d.target.id)  + "</b>");
                  tooltip.select('.monto').html("<b> monto: " + Intl.NumberFormat().format(d.value)   + "</b>");
                  tooltip.style('display', 'block');
@@ -226,7 +226,7 @@
       //    loadCircularHeatline(p_financiador) )
 
             .on('mouseover', function(d) {
-                 tooltip.select('.candidato').html( d.id );
+                 tooltip.select('.candidato').html( d.id.toUpperCase() );
                  tooltip.select('.target').html("</b>");
                  tooltip.select('.source').html("</b>");
                  tooltip.select('.parentesco').html("</b>");
@@ -307,7 +307,7 @@
             return node.type === "source" ? '#fc4e2a' : '#FFE80D' // ''naranja' : 'amarillo'
           }
 
-          return node.type === "source" ? '#08306b' : '#6a51a3'   // 'azul oscuro' : 'morado'
+          return node.type === "source" ? '#08306b' : '#4292c6'   // 'azul oscuro' : 'morado'
         };
 
 
