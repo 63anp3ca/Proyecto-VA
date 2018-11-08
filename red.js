@@ -1,4 +1,4 @@
- function loadCircularHeatRed (p_departamento, p_anno,p_campana, p_parentesco) { 
+ function loadCircularHeatRed (p_departamento,p_campana, p_parentesco) { 
  
    
     document.getElementById('chart3').style.display = 'none';
@@ -44,8 +44,8 @@
        {
          if (error) throw error;
      
-            console.log("data");
-            console.log(data);
+            // console.log("data");
+            // console.log(data);
 
            // console.log("p_parentesco");
            // console.log(p_parentesco);
@@ -54,21 +54,18 @@
                       {
 
                           var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
-                                                              && d.cargo === p_campana
-                                                              && d.anno === p_anno });
+                                                              && d.cargo === p_campana  });
                       }
                      else if  ( p_parentesco == "NA") 
                       {
                             var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
                                                               && d.cargo === p_campana
-                                                              && d.anno === p_anno
                                                               && d.parentesco === "NA"});
                      } 
                      else  
                      {
                             var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
                                                               && d.cargo === p_campana
-                                                              && d.anno === p_anno
                                                               && d.parentesco != "NA"});
                     };
 
@@ -122,8 +119,8 @@
          // console.log("links");
          // console.log(links);
 
-          console.log("graph");
-          console.log(graph);
+          // console.log("graph");
+          // console.log(graph);
     
         svg.call(
           d3.zoom()
@@ -173,10 +170,10 @@
          // .attr("stroke-width", 3)
           .attr("stroke-width", function(d){
                    if (dbbuscarp(d.source , d.target)  == "NA") 
-                      { return 2 ;}
+                      { return 1 ;}
                    else 
                       {return 5 ;}})        
-          .attr("stroke", "rgba(50, 50, 50, 0.2)")
+          .attr("stroke", "#de2d26")
           .on('mouseover', function(d) {
                  tooltip.select('.candidato').html("<b>  Departamento Ingreso: " + dbbuscard(d.source.id , d.target.id)  + "</b>" );
                  tooltip.select('.source').html("<b> Financiador: " + d.target.id.toUpperCase()  + "</b>");
@@ -214,7 +211,8 @@
                    if (dbbuscarf(d.id )  == "SI"  && d.type == "target") 
                       { return "#e7298a" ;}
                    else 
-                      {return "#ffffff" ;}}) 
+                      {return "#4292c6" ;}}) 
+            .attr("stroke-width", 3)
             .attr("fill", getNodeColor)
             .call(dragDrop)
             .on('click', selectNode)

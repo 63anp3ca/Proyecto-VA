@@ -13,7 +13,7 @@
    <script src="https://d3js.org/d3-color.v1.min.js"></script>
    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-   <script type="text/javascript" src="map.js"></script>
+    <script type="text/javascript" src="map.js"></script>
    <script type="text/javascript" src="red.js"></script>
    <script type="text/javascript" src="line.js"></script>
 
@@ -27,7 +27,8 @@
     <style>
       
         svg {
-                border: 1px solid gray;
+                border: 1px solid gray
+                ;
           }
 
         div.tooltip { 
@@ -157,69 +158,64 @@
                           <div class="col">
                               <label for="exampleFormControlSelect1">Seleccione la Campaña:</label>
                               <select class="form-control" id="campana">
-                                    <option value="Alcaldia">Alcaldia</option>
-                                    <option value="Asamblea">Asamblea</option>
-                                    <option value="Camara de Representates">Camara de Representates</option>
-                                    <option value="Concejo">Concejo</option>
-                                    <option value="Gobernacion">Gobernacion</option>
+                                    <option value="Congreso 2018-Camara de Representates">Congreso 2018-Camara de Representates</option>
+                                    <option value="Congreso 2018-Senado de la Republica">Congreso 2018-Senado de la Republica</option>
+                                    <option value="Regionales 2015-Alcaldia">Regionales 2015-Alcaldia</option>
+                                    <option value="Regionales 2015-Asamblea">Regionales 2015-Asamblea</option>
+                                    <option value="Regionales 2015-Concejo">Regionales 2015-Concejo</option>
+                                    <option value="Regionales 2015-Gobernacion">Regionales 2015-Gobernacion</option>
                               </select>
                           </div>
                           <div class="col">
-                               <label for="exampleFormControlSelect1">Seleccione el Año:</label>
-                               <select class="form-control" id="anno">
-                                   <option value="2018">2018</option>
-                                   <option value="2017">2017</option>
-                                   <option value="2016">2016</option>
-                                   <option value="2015">2015</option>
-                               </select>
+                               <label for="exampleFormControlSelect1">Seleccione el Departamento:</label>
+                              <select class="form-control"  id="dpto">  <!-- onchange="loadCircularHeatMap(value, document.getElementById('campana').value)"  -->
+                                      <option value="AMAZONAS">AMAZONAS</option>
+                                      <option value="ANTIOQUIA">ANTIOQUIA</option>
+                                      <option value="ARAUCA">ARAUCA</option>
+                                      <option value="ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA">ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA</option>
+                                      <option value="ATLANTICO">ATLANTICO</option>
+                                      <option value="BOLIVAR">BOLIVAR</option>
+                                      <option value="BOYACA">BOYACA</option>
+                                      <option value="CALDAS">CALDAS</option>
+                                      <option value="CAQUETA">CAQUETA</option>
+                                      <option value="CASANARE">CASANARE</option>
+                                      <option value="CAUCA">CAUCA</option>
+                                      <option value="CESAR">CESAR</option>
+                                      <option value="CHOCO">CHOCO</option>
+                                      <option value="CORDOBA">CORDOBA</option>
+                                      <option value="CUNDINAMARCA">CUNDINAMARCA</option>
+                                      <option value="GUAINIA">GUAINIA</option>
+                                      <option value="GUAVIARE">GUAVIARE</option>
+                                      <option value="HUILA">HUILA</option>
+                                      <option value="LA GUAJIRA">LA GUAJIRA</option>
+                                      <option value="MAGDALENA">MAGDALENA</option>
+                                      <option value="META">META</option>
+                                      <option value="NARIÑO">NARIÑO</option>
+                                      <option value="NORTE DE SANTANDER">NORTE DE SANTANDER</option>
+                                      <option value="PUTUMAYO">PUTUMAYO</option>
+                                      <option value="QUINDIO">QUINDIO</option>
+                                      <option value="RISARALDA">RISARALDA</option>
+                                      <option value="SANTAFE DE BOGOTA D.C">SANTAFE DE BOGOTA D.C</option>
+                                      <option value="SANTANDER">SANTANDER</option>
+                                      <option value="SUCRE">SUCRE</option>
+                                      <option value="TOLIMA">TOLIMA</option>
+                                      <option value="VALLE DEL CAUCA">VALLE DEL CAUCA</option>
+                                      <option value="VAUPES">VAUPES</option>
+                                      <option value="VICHADA">VICHADA</option>
+                              </select>
                           </div>
+                          <div class="col">
+                                 <label for="exampleFormControlSelect1"></label>
+                                 <p><a class="btn btn-secondary" onclick="loadCircularHeatMap(document.getElementById('dpto').value, document.getElementById('campana').value)" role="button">Generar Consulta &raquo;</a></p> 
+                           </div>
                         </div>
-                        <div class="form-group">
-                          <label for="exampleFormControlSelect1">Seleccione el Departamento:</label>
-                          <select class="form-control"   onchange="loadCircularHeatMap(value, document.getElementById('anno').value, document.getElementById('campana').value)"  id="dpto">
-                                  <option value="AMAZONAS">AMAZONAS</option>
-                                  <option value="ANTIOQUIA">ANTIOQUIA</option>
-                                  <option value="ARAUCA">ARAUCA</option>
-                                  <option value="ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA">ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA</option>
-                                  <option value="ATLANTICO">ATLANTICO</option>
-                                  <option value="BOLIVAR">BOLIVAR</option>
-                                  <option value="BOYACA">BOYACA</option>
-                                  <option value="CALDAS">CALDAS</option>
-                                  <option value="CAQUETA">CAQUETA</option>
-                                  <option value="CASANARE">CASANARE</option>
-                                  <option value="CAUCA">CAUCA</option>
-                                  <option value="CESAR">CESAR</option>
-                                  <option value="CHOCO">CHOCO</option>
-                                  <option value="CORDOBA">CORDOBA</option>
-                                  <option value="CUNDINAMARCA">CUNDINAMARCA</option>
-                                  <option value="GUAINIA">GUAINIA</option>
-                                  <option value="GUAVIARE">GUAVIARE</option>
-                                  <option value="HUILA">HUILA</option>
-                                  <option value="LA GUAJIRA">LA GUAJIRA</option>
-                                  <option value="MAGDALENA">MAGDALENA</option>
-                                  <option value="META">META</option>
-                                  <option value="NARIÑO">NARIÑO</option>
-                                  <option value="NORTE DE SANTANDER">NORTE DE SANTANDER</option>
-                                  <option value="PUTUMAYO">PUTUMAYO</option>
-                                  <option value="QUINDIO">QUINDIO</option>
-                                  <option value="RISARALDA">RISARALDA</option>
-                                  <option value="SANTAFE DE BOGOTA D.C">SANTAFE DE BOGOTA D.C</option>
-                                  <option value="SANTANDER">SANTANDER</option>
-                                  <option value="SUCRE">SUCRE</option>
-                                  <option value="TOLIMA">TOLIMA</option>
-                                  <option value="VALLE DEL CAUCA">VALLE DEL CAUCA</option>
-                                  <option value="VAUPES">VAUPES</option>
-                                  <option value="VICHADA">VICHADA</option>
-                          </select>
-                        </div>
-
                     </form>
                   </div>
                  <div id="chart" class='container' >
                     <!--  <div class='container' style="background-color: #cacaca;" > -->
-                        <h3 ALIGN=center><b> Comportamiento de Financiación de campañas por Departamento.</b></h3>
+                     <p></b></p> 
+                     <h3 ALIGN=center><b> Comportamiento de Financiación de campañas por Departamento.</b></h3>
                      <p>En este mapa se presentan los departamentos de los candidatos que recibieron financiamiento para sus campañas.  En las listas disponibles debe seleccionar la campaña, año y departamento sobre los cuales se desea conocer el comportamiento de financiamiento.  Al hacer doble click en cualquier parte del mapa podrá acceder a la red de campañas y financiadores, incluyendo su parentesco. Adicionalmente, al pasar sobre los distintos departamentos se muestra un mensaje emergente con la información con el monto total de financiamiento a la campaña.</p>
-                    <!--  </div> -->
                      <svg  width=300 height=500  id="zooms"  ></svg>
                      <svg  width=700 height=500  id="main"></svg>
                      <script src="map.js">  </script> 
@@ -245,16 +241,15 @@
                                     <img src="redLeyenda.jpg" width="500" height="100" alt="..">
                              </div>
                           </div>  
-
-                           
+                       
                        </form>     
                        <svg  width=1000 height=600 id="network"></svg>
                        <script src="red.js">  </script> 
                 </div>
                 <div id="chart3" style="display:none;" class='container'>
-                       <h3 ALIGN=center><b> Comportamiento en celabración de contratos públicos por el financiador.</b></h3>
+                       <h3 ALIGN=center><b> Comportamiento en celebración de contratos públicos por el financiador.</b></h3>
                        <p> Esta visualización de los datos de financiadores y contratos públicos, presenta la cantidad de contratos y la sumatoria de los montos de contratos para el periodo de años comprendidas del 2006 al 2018.  Al situarse en los puntos se desplegará información con los detalles de montos totales. </p>   
-                       <svg  width=1000 height=500 id="line" ></svg>    
+                       <svg  width=1000 height=550 id="line" ></svg>    
                        <script src="line.js">  </script>      
                 </div>
                 <script>  loadCircularHeatMap("COLOMBIA");  </script>

@@ -27,7 +27,21 @@ function loadCircularHeatline(p_financiador)
         tooltip.append('div')
                .attr('class', 'entidad');
         tooltip.append('div')
-               .attr('class', 'municipio');              
+               .attr('class', 'municipio');
+        tooltip.append('div')
+               .attr('class', 'grupo');   
+        tooltip.append('div')
+               .attr('class', 'objeto');   
+   
+
+
+
+       var xVar = "Year";
+       var yVar = "Ingresos_USD";
+       var xTitle = "Fecha de Contratación";
+       var yTitle = "Monto Contrato ($)";
+       var cTitle = "Ingresos Diarios Promedio por Venta de Petróleo - Colombia";
+       var sColor = "darkgreen";                  
         
     		var data;
 
@@ -62,7 +76,9 @@ function loadCircularHeatline(p_financiador)
                 .range([height,0]);
               var x = d3.scaleTime()
                 .rangeRound([0, width]);
+
               x.domain(d3.extent(dataFiltered, function(d) { return d.date; }));
+             
               var line = d3.line()
             		.x(function(d) { return x(d.date); })
             		.y(function(d) { return y(d.value); });
@@ -87,15 +103,50 @@ function loadCircularHeatline(p_financiador)
               .call(d3.axisLeft(y));
 
 
-             g.append('g')
-                  .attr('class', 'legend')
-                  .append("text")
-                  .attr("x", -32)
-                  .attr("y", -25)
-                  .attr("dy", "0.71em")
-                  .attr('font-size', '14px')
-                  .attr("fill", "#3d3d3d")
-                  .text(p_financiador.toUpperCase());
+             // g.append('g')
+             //      .attr('class', 'legend')
+             //      .append("text")
+             //      .attr("style","font-size:16px; font-weight: bold;")
+             //      .attr("x", -20)
+             //      .attr("y", -30)
+             //      .attr("dy", "0.71em")
+             //      .attr('font-size', '14px')
+             //      .attr("fill", "#3d3d3d")
+             //      .text(p_financiador.toUpperCase());
+
+
+          // text label for the y axis
+            g.append("text")
+              .attr("transform", "rotate(-90)")
+              .attr("x", -(height / 2))
+              .attr("y", -margin.left)
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .style("font-family", "sans-serif")
+              .style("font-size", "12pt")
+              .text(yTitle);  
+
+            // text label for the x axis
+            g.append("text")
+              .attr("x", (width / 2))
+              .attr("y", height + (margin.bottom / 2))
+              .attr("dy", "1em")
+              .style("text-anchor", "middle")
+              .style("font-family", "sans-serif")
+              .style("font-size", "12pt")
+              .text(xTitle); 
+
+              // add title
+              g.append("text")
+                .attr("x", (width / 2))
+                .attr("y", (10 - margin.top))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .style("font-family", "sans-serif")
+                .style("font-size", "16pt")
+                .text(p_financiador.toUpperCase())
+                .style("color", "steelblue");
+
 
 
               var svg_aline = g.append("line")
@@ -120,6 +171,11 @@ function loadCircularHeatline(p_financiador)
               	.attr("stroke-width", 2)
               	.attr("d", line);
               
+
+
+
+
+
               g.selectAll("dot").data(dataFiltered)
               	.enter()
                 .append("circle")
@@ -142,6 +198,8 @@ function loadCircularHeatline(p_financiador)
                     tooltip.select('.monto').html("<b> Monto: " + Intl.NumberFormat().format(d.value) + "</b>");
                     tooltip.select('.entidad').html("<b> Entidad: " +d.Entidad+  "</b>");
                     tooltip.select('.municipio').html("<b> Municipio: " +d.Municipios  + "</b>");
+                    tooltip.select('.grupo').html("<b> Grupo: " +d.Grupo  + "</b>");
+                    tooltip.select('.objeto').html("<b> Objeto: " +d.objeto  + "</b>");
                     tooltip.style('display', 'block');
                     tooltip.style('opacity',2);
 
@@ -160,5 +218,8 @@ function loadCircularHeatline(p_financiador)
                     tooltip.style('display', 'none');
                     tooltip.style('opacity',0);
                 });
+
+
+
         })
 }

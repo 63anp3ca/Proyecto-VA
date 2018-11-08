@@ -1,4 +1,4 @@
-function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
+function loadCircularHeatMap (p_departamento, p_campana) {
   $( "#main" ).empty(); 
   $( "#zooms" ).empty();
   document.getElementById('chart2').style.display = 'none';
@@ -174,7 +174,7 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
   var projectionzoom = d3.geoMercator()
         .scale(3000)
         .center([parseFloat(longitud),parseFloat( latitud)]) // Center the Map in departamento lonjitud - latitud
-        .translate([250 / 2, height / 2]);
+        .translate([300 / 2, 140]);
 
 
   var path = d3.geoPath()
@@ -208,7 +208,7 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
 
     var dataFiltered = dataset.filter(function (d) { return d.departamento === p_departamento 
                                                       && d.cargo === p_campana
-                                                      && d.anno === p_anno
+                                                      
                                                     });
      // console.log("dataFiltered");
      // console.log(dataFiltered);    
@@ -228,9 +228,7 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
       } 
     });
 
-   // console.log("dictData");
-   // console.log(dictData);     
-
+   
   
   var dictData2 = {};
     dataFiltered.forEach(function (d) {
@@ -249,16 +247,44 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
       } 
     });
 
-   // console.log("dictData2");
-   // console.log(dictData2);    
+
+    var dictData3 = {};
+    dataFiltered.forEach(function (d) {
+      if(dictData3[d.departamento.toUpperCase()]){
+
+         dictData3[d.departamento.toUpperCase()].cantidad += parseInt(d.valor);
+      }else{
+        dictData3[d.departamento.toUpperCase()] = {
+          nombre : d.departamento,
+          cantidad : parseInt(d.valor)
+
+        };
+        
+      } 
+    });
+
+
+    
+      // console.log("dictData2");
+   //console.log(dictData2);    
+
+   console.log("dictData3");
+   console.log(dictData2);
+   console.log(dictData3);
+
+   //dep = dictData3+"."+p_departamento;  
+  // console.log(d.departamento);     
+   
+ 
+ 
 
 
   var arrayDictData = Object.keys( dictData2 ).map(function ( key ) {
     return dictData2[key]; 
     });
 
-  var min = d3.min(arrayDictData, function(d) { return d.cantidad; });
-  var max = d3.max(arrayDictData, function(d) { return d.cantidad; });
+  var min = parseInt(d3.min(arrayDictData, function(d) { return d.cantidad; }));
+  var max = parseInt(d3.max(arrayDictData, function(d) { return d.cantidad; }));
   
   // console.log("min");
   // console.log(min);  
@@ -269,8 +295,10 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
 
   if (min == max ){ min= 0;}; 
 
-  var color = d3.scaleSequential(d3.interpolateYlGnBu)
-    .domain([min, max]);
+  var color = d3.scaleSequential(d3.interpolateYlGn)
+    .domain([min, max])
+    .clamp(true)
+    ;
 
   svg.call(zoom);
 
@@ -302,11 +330,11 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
                 if (departamento){
                   return color(departamento.cantidad);
                 } else{
-                  return '#bdbdbd';
+                  return '#fec44f';  //'#fec44f'
                 } 
              })
             .style("opacity",0.8)
-            .style("stroke","#ffffff")
+            .style("stroke","#000000")
             .style('stroke-width', 1)
             .on("dblclick", dblclick)
             .on("mouseover", function(d) {
@@ -336,6 +364,7 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
          svgzoom.append('g')
               .attr('class', 'legend')
               .append("text")
+               .attr("style","font-size:20px; font-weight: bold;")
               // .attr("transform", "rotate(-90)")
               .attr("x", 20)
               .attr("y", 20)
@@ -349,23 +378,24 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
               .attr('class', 'legend')
               .append("text")
               // .attr("transform", "rotate(-90)")
-              .attr("x", 20)
-              .attr("y", 50)
+              .attr("x", 5)
+              .attr("y", 250)
               .attr("dy", "0.71em")
               .attr('font-size', '16px')
               .attr("fill", "#3d3d3d")
-              .text("Campaña :"+p_campana );      
+              .text(p_campana);      
        
         svgzoom.append('g')
               .attr('class', 'legend')
               .append("text")
+               .attr("style","font-size:20px; font-weight: bold;")
               // .attr("transform", "rotate(-90)")
-              .attr("x", 20)
-              .attr("y", 70)
+              .attr("x", 75)
+              .attr("y", 270)
               .attr("dy", "0.71em")
               .attr('font-size', '16px')
               .attr("fill", "#3d3d3d")
-              .text(" Año :" + p_anno);      
+              .text(" $400.271.513" );      
       
 
         svgzoom.append("g")
@@ -375,14 +405,23 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
               .enter()
               .append("path")
                 .attr("d", pathzoom)
+               // .attr("aling" , "start")
                 .style("opacity",0.8)
                // .style("stroke","black")
-                .style("stroke","#bdbdbd")
+                .style("stroke","#000000")
                 .style('stroke-width', 1)
-                .style("fill","#800026")
+                .style("fill","#00441b")
                 .on("dblclick", dblclick)
                 ;
 
+        // svgzoom.append("g")
+        //       .attr("class", "text")
+        //       .data(dictData3) 
+        //       .enter()
+        //       .append("text")
+        //       .text(dictData3.cantidad);    
+        //         ;
+      
 
         // The legend con esla de color 
         svg.append("g")
@@ -404,6 +443,7 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
         svgzoom.append('g')
         .attr('class', 'legend')
         .append("text")
+        .attr("style","font-size:20px; font-weight: bold;")
         // .attr("transform", "rotate(-90)")
         .attr("x", 20)
         .attr("y", 20)
@@ -429,10 +469,19 @@ function loadCircularHeatMap (p_departamento, p_anno,p_campana) {
   }  
 });
 
+
+       function dbbuscard(p_candidato,p_financiador) {
+           var dataFiltered7 = data.filter(function (d) { return d.candidato === p_candidato 
+                                                              && d.financiador === p_financiador  });
+           var dataFiltered8 = dataFiltered3.map(d=> d.departamentoi);
+              return dataFiltered4[0]
+        }
+
+
    function dblclick() {
         document.getElementById('chart2').style.display = 'block';
         document.getElementById('chart3').style.display = 'none';
-        loadCircularHeatRed(p_departamento, p_anno,p_campana, "todos");
+        loadCircularHeatRed(p_departamento,p_campana, "todos");
     }
 
 }
