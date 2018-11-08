@@ -351,7 +351,7 @@ function loadCircularHeatMap (p_departamento, p_campana) {
               .append("text")
                .attr("style","font-size:20px; font-weight: bold;")
               // .attr("transform", "rotate(-90)")
-              .attr("x", 20)
+              .attr("x", 10)
               .attr("y", 20)
               .attr("dy", "0.71em")
               .attr('font-size', '20px')
@@ -363,20 +363,30 @@ function loadCircularHeatMap (p_departamento, p_campana) {
               .attr('class', 'legend')
               .append("text")
               // .attr("transform", "rotate(-90)")
-              .attr("style","font-size:12px; font-weight: bold;")
-              .attr("x", 5)
+           //   .attr("style","font-size:12px; font-weight: bold;")
+              .style("font-size", "14px")
+              .style("font-family", "sans-serif")
+              .style("font-weight", "bold")
+              .attr("x", 10)
               .attr("y", 250)
               .attr("dy", "0.71em")
               .attr('font-size', '16px')
               .attr("fill", "#3d3d3d")
               .text(p_campana);      
        
+            
+
+
+   
+
+
+
         svgzoom.append('g')
               .attr('class', 'legend')
               .append("text")
                .attr("style","font-size:22px; font-weight: bold;")
               // .attr("transform", "rotate(-90)")
-              .attr("x", 75)
+              .attr("x", 10)
               .attr("y", 270)
               .attr("dy", "0.71em")
               .attr('font-size', '16px')
