@@ -75,7 +75,7 @@ function loadCircularHeatline(p_financiador)
                 .domain([0, max])
                 .range([height,0]);
               var x = d3.scaleTime()
-                .rangeRound([0, width]);
+                .rangeRound([25, width]);
 
               x.domain(d3.extent(dataFiltered, function(d) { return d.date; }));
              

@@ -241,43 +241,28 @@ function loadCircularHeatMap (p_departamento, p_campana) {
           cantidad : parseInt(d.valor)
 
         };
-         // console.log("d.departamento2");
-         // console.log(d.departamento);   
-         // console.log(d.valor); 
-      } 
+        } 
     });
 
 
-    var dictData3 = {};
-    dataFiltered.forEach(function (d) {
-      if(dictData3[d.departamento.toUpperCase()]){
-
-         dictData3[d.departamento.toUpperCase()].cantidad += parseInt(d.valor);
-      }else{
-        dictData3[d.departamento.toUpperCase()] = {
-          nombre : d.departamento,
-          cantidad : parseInt(d.valor)
-
-        };
-        
-      } 
-    });
-
-
-    
-      // console.log("dictData2");
-   //console.log(dictData2);    
-
-   console.log("dictData3");
-   console.log(dictData2);
-   console.log(dictData3);
-
-   //dep = dictData3+"."+p_departamento;  
-  // console.log(d.departamento);     
-   
  
- 
+     
+  console.log("dataFiltered");
+  console.log(dataFiltered);
 
+    var i;
+    var valorTotal = 0;
+    for (i = 0; i < dataFiltered.length; i++) { 
+         valorTotal += parseInt(dataFiltered[i].valor);
+    };
+
+  console.log("valorTotal");
+  console.log(valorTotal);
+
+ // var valorTotal = 0;
+    for (i = 0; i < dataFiltered.length; i++) { 
+         console.log(dataFiltered[i].departamento_Ingreso);
+    };
 
   var arrayDictData = Object.keys( dictData2 ).map(function ( key ) {
     return dictData2[key]; 
@@ -378,6 +363,7 @@ function loadCircularHeatMap (p_departamento, p_campana) {
               .attr('class', 'legend')
               .append("text")
               // .attr("transform", "rotate(-90)")
+              .attr("style","font-size:12px; font-weight: bold;")
               .attr("x", 5)
               .attr("y", 250)
               .attr("dy", "0.71em")
@@ -388,14 +374,14 @@ function loadCircularHeatMap (p_departamento, p_campana) {
         svgzoom.append('g')
               .attr('class', 'legend')
               .append("text")
-               .attr("style","font-size:20px; font-weight: bold;")
+               .attr("style","font-size:22px; font-weight: bold;")
               // .attr("transform", "rotate(-90)")
               .attr("x", 75)
               .attr("y", 270)
               .attr("dy", "0.71em")
               .attr('font-size', '16px')
               .attr("fill", "#3d3d3d")
-              .text(" $400.271.513" );      
+              .text("$"+Intl.NumberFormat().format(valorTotal) );      
       
 
         svgzoom.append("g")
@@ -476,6 +462,8 @@ function loadCircularHeatMap (p_departamento, p_campana) {
            var dataFiltered8 = dataFiltered3.map(d=> d.departamentoi);
               return dataFiltered4[0]
         }
+
+     
 
 
    function dblclick() {
