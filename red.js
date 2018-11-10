@@ -310,7 +310,7 @@
 
 
         function getLinkColor(node, link) {
-          return isNeighborLink(node, link) ? 'green' : '#E5E5E5'
+          return isNeighborLink(node, link) ? 'green' : '#de2d26'
         }
 
         function getTextColor(node, neighbors) {

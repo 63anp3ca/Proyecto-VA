@@ -54,7 +54,7 @@
           }
           .dot {
             opacity: 0.5;
-            fill: grey;
+            fill: #54278f;
           }
           
          /* line {
@@ -169,6 +169,7 @@
                           <div class="col">
                                <label for="exampleFormControlSelect1">Seleccione el Departamento:</label>
                               <select class="form-control"  id="dpto">  <!-- onchange="loadCircularHeatMap(value, document.getElementById('campana').value)"  -->
+                                      <option value="TODOS">TODOS</option>
                                       <option value="AMAZONAS">AMAZONAS</option>
                                       <option value="ANTIOQUIA">ANTIOQUIA</option>
                                       <option value="ARAUCA">ARAUCA</option>
@@ -190,7 +191,7 @@
                                       <option value="LA GUAJIRA">LA GUAJIRA</option>
                                       <option value="MAGDALENA">MAGDALENA</option>
                                       <option value="META">META</option>
-                                      <option value="NARIÑO">NARIÑO</option>
+                                      <option value="NARINO">NARIÑO</option>
                                       <option value="NORTE DE SANTANDER">NORTE DE SANTANDER</option>
                                       <option value="PUTUMAYO">PUTUMAYO</option>
                                       <option value="QUINDIO">QUINDIO</option>
@@ -254,7 +255,7 @@
                        <svg  width=1000 height=550 id="line" ></svg>    
                        <script src="line.js">  </script>      
                 </div>
-                <script>  loadCircularHeatMap("COLOMBIA");  </script>
+                <script>  loadCircularHeatMap("COLOMBIA","");  </script>
         </main>
         <!--  <script>  loadCircularHeatRed("BOLIVAR","2015","Alcaldia");  </script> -->
         <footer style="background-color: #cacaca;

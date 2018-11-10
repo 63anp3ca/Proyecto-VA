@@ -120,8 +120,8 @@ function loadCircularHeatMap (p_departamento, p_campana) {
           longitud = -76;  
           break;   
      case "SANTAFE DE BOGOTA D.C":
-          latitud = -1; 
-          longitud = -71.9;
+          latitud = 4; 
+          longitud = -74.9;
           break;
      case "SANTANDER":
           latitud = 7; 
@@ -203,66 +203,83 @@ function loadCircularHeatMap (p_departamento, p_campana) {
     .await(function(error, mapData, dataset){
 
     
-     // console.log("dataset");
-     // console.log(dataset);       
+      console.log("mapData");
+      console.log(mapData);       
 
     var dataFiltered = dataset.filter(function (d) { return d.departamento === p_departamento 
                                                       && d.cargo === p_campana
                                                       
                                                     });
-     // console.log("dataFiltered");
-     // console.log(dataFiltered);    
+      console.log("dataset");
+      console.log(dataset);    
 
-    var dictData = {};
-    dataset.forEach(function (d) {
-      if(dictData[d.departamento.toUpperCase()]){
-        dictData[d.departamento.toUpperCase()].cantidad += parseInt(d.valor);
- 
-      }else{
-        dictData[d.departamento.toUpperCase()] = {
-          nombre : d.departamento,
-          departamento_ingreso : d.departamento_Ingreso,
-          cantidad : parseInt(d.valor)
-        };
-        
-      } 
-    });
+     var dictData2 = {};
+     if (p_departamento  == "TODOS"){
+               
+                dataset.forEach(function (d) {
+                  if(dictData2[d.departamento.toUpperCase()]){
+                    dictData2[d.departamento.toUpperCase()].cantidad += parseInt(d.valor);
+             
+                  }else{
+                    dictData2[d.departamento.toUpperCase()] = {
+                      nombre : d.departamento,
+                      cantidad : parseInt(d.valor)
+                    };
+                    
+                  } 
+                });
 
+      }
+      else{
+         dataFiltered.forEach(function (d) {
+          if(dictData2[d.departamento_Ingreso.toUpperCase()]){
+
+             dictData2[d.departamento_Ingreso.toUpperCase()].cantidad += parseInt(d.valor);
+          }else{
+            dictData2[d.departamento_Ingreso.toUpperCase()] = {
+              nombre : d.departamento_Ingreso,
+              cantidad : parseInt(d.valor)
+
+            };
+            } 
+        });
+
+      }
+   
+  console.log("dictData2");
+  console.log(dictData2); 
    
   
-  var dictData2 = {};
-    dataFiltered.forEach(function (d) {
-      if(dictData2[d.departamento_Ingreso.toUpperCase()]){
-
-         dictData2[d.departamento_Ingreso.toUpperCase()].cantidad += parseInt(d.valor);
-      }else{
-        dictData2[d.departamento_Ingreso.toUpperCase()] = {
-          nombre : d.departamento_Ingreso,
-          cantidad : parseInt(d.valor)
-
-        };
-        } 
-    });
-
-
- 
+  
      
   console.log("dataFiltered");
   console.log(dataFiltered);
 
-    var i;
+  var i;
+ if (p_departamento  == "TODOS"){
+   
+    var valorTotal = 0;
+    for (i = 0; i < dataset.length; i++) { 
+         valorTotal += parseInt(dataset[i].valor);
+    };
+
+  }
+  else{
     var valorTotal = 0;
     for (i = 0; i < dataFiltered.length; i++) { 
          valorTotal += parseInt(dataFiltered[i].valor);
     };
 
+
+  };
+  
   console.log("valorTotal");
   console.log(valorTotal);
 
  // var valorTotal = 0;
-    for (i = 0; i < dataFiltered.length; i++) { 
-         console.log(dataFiltered[i].departamento_Ingreso);
-    };
+    // for (i = 0; i < dataFiltered.length; i++) { 
+    //      console.log(dataFiltered[i].departamento_Ingreso);
+    // };
 
   var arrayDictData = Object.keys( dictData2 ).map(function ( key ) {
     return dictData2[key]; 
@@ -321,7 +338,19 @@ function loadCircularHeatMap (p_departamento, p_campana) {
             .style("opacity",0.8)
             .style("stroke","#000000")
             .style('stroke-width', 1)
-            .on("dblclick", dblclick)
+         //   .on("dblclick", dblclick)
+
+            .on("dblclick",  function(d) {
+                  $( "#network" ).empty(); 
+                  document.getElementById('chart2').style.display = 'block';
+                  document.getElementById('chart3').style.display = 'none';
+                  loadCircularHeatRed(d.properties.NOMBRE_DPT,p_campana, "todos");
+                  console.log("d.NOMBRE_DPT");
+                  console.log(d.properties.NOMBRE_DPT); 
+    
+             })
+
+
             .on("mouseover", function(d) {
               var label = '';     
               var departamento = dictData2[d.properties.NOMBRE_DPT];
