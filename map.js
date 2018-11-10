@@ -246,14 +246,14 @@ function loadCircularHeatMap (p_departamento, p_campana) {
 
       }
    
-  console.log("dictData2");
-  console.log(dictData2); 
+  // console.log("dictData2");
+  // console.log(dictData2); 
    
   
   
      
-  console.log("dataFiltered");
-  console.log(dataFiltered);
+  // console.log("dataFiltered");
+  // console.log(dataFiltered);
 
   var i;
  if (p_departamento  == "TODOS"){
@@ -273,8 +273,8 @@ function loadCircularHeatMap (p_departamento, p_campana) {
 
   };
   
-  console.log("valorTotal");
-  console.log(valorTotal);
+  // console.log("valorTotal");
+  // console.log(valorTotal);
 
  // var valorTotal = 0;
     // for (i = 0; i < dataFiltered.length; i++) { 
@@ -347,16 +347,14 @@ function loadCircularHeatMap (p_departamento, p_campana) {
                               document.getElementById('chart3').style.display = 'none';
                               document.getElementById("dpto").value = d.properties.NOMBRE_DPT;
                               loadCircularHeatRed(d.properties.NOMBRE_DPT,p_campana, "todos");
-                              console.log("d.NOMBRE_DPT");
-                              console.log(d.properties.NOMBRE_DPT); 
+                            
                         }
                         else{
                               $( "#network" ).empty(); 
                               document.getElementById('chart2').style.display = 'block';
                               document.getElementById('chart3').style.display = 'none';
                               loadCircularHeatRed(p_departamento,p_campana, "todos");
-                              console.log("p_departamento");
-                              console.log(p_departamento); 
+                              
                        };
               })
             .on("mouseover", function(d) {

@@ -124,8 +124,8 @@
          // console.log("links");
          // console.log(links);
 
-          // console.log("graph");
-          // console.log(graph);
+           // console.log("graph");
+           // console.log(graph);
     
         svg.call(
           d3.zoom()
@@ -225,6 +225,7 @@
                   $( "#line" ).empty(); 
                   document.getElementById('chart3').style.display = 'block';
                   loadCircularHeatline(d.id);
+
              })
       //    loadCircularHeatline(p_financiador) )
 

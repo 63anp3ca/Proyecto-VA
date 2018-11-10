@@ -1,8 +1,8 @@
 function loadCircularHeatline(p_financiador) 
 { 
         
-        console.log("p_financiador");
-              console.log(p_financiador);
+        // console.log("p_financiador");
+        //       console.log(p_financiador);
 
         var margin = {top: 50, right: 30, bottom: 100, left: 100};
         let svg = d3.select("#line"),
@@ -218,6 +218,49 @@ function loadCircularHeatline(p_financiador)
                     tooltip.style('display', 'none');
                     tooltip.style('opacity',0);
                 });
+
+
+               var thisDate = '2015-02-01T00:00:00';
+                var IPOfecha = new Date(thisDate);
+
+          
+                console.log(IPOfecha)
+                
+                var aportes = [IPOfecha, 10000000];
+             
+                console.log("aportes");
+                console.log(aportes);
+
+
+                
+                console.log(aportes[0]);
+                 console.log(aportes[1]);
+
+               g.selectAll("dot").data(aportes)
+                .enter()
+                .append("circle")
+                .attr("r",8)
+                .style("fill", "#006d2c")
+                .attr("cx", function(d){return x(aportes[0])})
+                .attr("cy", function(d){return y(aportes[1]);})
+                .on("mouseover", function(d) {  
+                    d3.select(this).transition().duration(100)
+                        .style("fill", "#a50f15")
+                        .attr("r", 12);
+                    svg_aline.transition().duration(10)
+                      .style("display", "block")
+                      .attr("x1", x(aportes[0]))
+                      .attr("y1", y(aportes[1]))
+                      .attr("x2", x(aportes[0]))
+                      .attr("y2", height);
+                 })
+                 .on("mouseout", function(d) {  
+                    d3.select(this).transition().duration(100)
+                      .style("fill", "#006d2c")
+                      .attr("r", 8)
+                    svg_aline.style("display","None")  
+                 });
+        
 
 
 
