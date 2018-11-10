@@ -341,16 +341,24 @@ function loadCircularHeatMap (p_departamento, p_campana) {
          //   .on("dblclick", dblclick)
 
             .on("dblclick",  function(d) {
-                  $( "#network" ).empty(); 
-                  document.getElementById('chart2').style.display = 'block';
-                  document.getElementById('chart3').style.display = 'none';
-                  loadCircularHeatRed(d.properties.NOMBRE_DPT,p_campana, "todos");
-                  console.log("d.NOMBRE_DPT");
-                  console.log(d.properties.NOMBRE_DPT); 
-    
-             })
-
-
+                    if (p_departamento  == "TODOS"){
+                              $( "#network" ).empty(); 
+                              document.getElementById('chart2').style.display = 'block';
+                              document.getElementById('chart3').style.display = 'none';
+                              document.getElementById("dpto").value = d.properties.NOMBRE_DPT;
+                              loadCircularHeatRed(d.properties.NOMBRE_DPT,p_campana, "todos");
+                              console.log("d.NOMBRE_DPT");
+                              console.log(d.properties.NOMBRE_DPT); 
+                        }
+                        else{
+                              $( "#network" ).empty(); 
+                              document.getElementById('chart2').style.display = 'block';
+                              document.getElementById('chart3').style.display = 'none';
+                              loadCircularHeatRed(p_departamento,p_campana, "todos");
+                              console.log("p_departamento");
+                              console.log(p_departamento); 
+                       };
+              })
             .on("mouseover", function(d) {
               var label = '';     
               var departamento = dictData2[d.properties.NOMBRE_DPT];

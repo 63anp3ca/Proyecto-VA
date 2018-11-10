@@ -49,25 +49,30 @@
 
            // console.log("p_parentesco");
            // console.log(p_parentesco);
-           
-           if ( p_parentesco == "todos") 
-                      {
 
-                          var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
-                                                              && d.cargo === p_campana  });
-                      }
-                     else if  ( p_parentesco == "NA") 
-                      {
-                            var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
-                                                              && d.cargo === p_campana
-                                                              && d.parentesco === "NA"});
-                     } 
-                     else  
-                     {
-                            var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
-                                                              && d.cargo === p_campana
-                                                              && d.parentesco != "NA"});
-                    };
+
+
+       
+           
+                 if ( p_parentesco == "todos"  ) 
+                            {
+
+                                var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
+                                                                    && d.cargo === p_campana  });
+                            }
+                  else if  ( p_parentesco == "NA" ) 
+                            {
+                                  var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
+                                                                    && d.cargo === p_campana
+                                                                    && d.parentesco === "NA"});
+                           } 
+                  else  
+                           {
+                                  var dataFiltered = data.filter(function (d) { return d.departamento === p_departamento 
+                                                                    && d.cargo === p_campana
+                                                                    && d.parentesco != "NA"});
+                          };
+          
 
             
             
