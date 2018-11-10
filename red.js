@@ -224,7 +224,7 @@
             .on("dblclick",  function(d) {
                   $( "#line" ).empty(); 
                   document.getElementById('chart3').style.display = 'block';
-                  loadCircularHeatline(d.id);
+                  loadCircularHeatline(d.id, d.volume);
 
              })
       //    loadCircularHeatline(p_financiador) )

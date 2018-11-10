@@ -1,4 +1,4 @@
-function loadCircularHeatline(p_financiador) 
+function loadCircularHeatline(p_financiador, p_monto) 
 { 
         
         // console.log("p_financiador");
@@ -70,6 +70,12 @@ function loadCircularHeatline(p_financiador)
 
               console.log("dataFiltered");
               console.log(dataFiltered);
+
+              if (p_monto > max) {
+
+                      max = p_monto
+              };
+
 
               var y = d3.scaleLinear()
                 .domain([0, max])
@@ -226,7 +232,7 @@ function loadCircularHeatline(p_financiador)
           
                 console.log(IPOfecha)
                 
-                var aportes = [IPOfecha, 10000000];
+                var aportes = [IPOfecha, p_monto];
              
                 console.log("aportes");
                 console.log(aportes);
@@ -253,12 +259,27 @@ function loadCircularHeatline(p_financiador)
                       .attr("y1", y(aportes[1]))
                       .attr("x2", x(aportes[0]))
                       .attr("y2", height);
+                       tooltip.select('.contrato').html("<b> " );
+                       tooltip.select('.fecha').html("<b> ");
+                       tooltip.select('.monto').html("<b> Aportes: " + Intl.NumberFormat().format(aportes[1]) + "</b>");
+                       tooltip.select('.entidad').html("<b> ");
+                       tooltip.select('.municipio').html("<b> ");
+                       tooltip.select('.grupo').html("<b> ");
+                       tooltip.select('.objeto').html("<b> ");
+                       tooltip.style('display', 'block');
+                       tooltip.style('opacity',2);
                  })
+                 .on('mousemove', function(d) {
+                          tooltip.style('top', (d3.event.layerY + 10) + 'px')
+                          .style('left', (d3.event.layerX - 25) + 'px');
+                  })
                  .on("mouseout", function(d) {  
                     d3.select(this).transition().duration(100)
                       .style("fill", "#006d2c")
                       .attr("r", 8)
-                    svg_aline.style("display","None")  
+                    svg_aline.style("display","None") 
+                    tooltip.style('display', 'none');
+                    tooltip.style('opacity',0); 
                  });
         
 
